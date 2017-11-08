@@ -1,0 +1,13 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+<h3>{{ post.title }}</h3>
+
+        <p><small>By {{ post.user }} on {{ post.published|date('H:i d/m/y') }}
+            </small>
+        <a href="{{ path('blogger_post_edit', {'id': post.id}) }}">edit</a>
+        </p>
+    <p>{{ post.content|nl2br }}</p>
+{% endblock %}

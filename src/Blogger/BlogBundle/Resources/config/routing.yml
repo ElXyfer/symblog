@@ -1,0 +1,42 @@
+blogger_blog_homepage:
+    path:     /
+    defaults: { _controller: BloggerBlogBundle:Page:index }
+
+
+blogger_about:
+    path:     /about
+    defaults: { _controller: BloggerBlogBundle:Page:about }
+
+blogger_login:
+    path:     /login
+    defaults: { _controller: FOSUserBundle:Security:login }
+
+blogger_logout:
+    path:     /logout
+    defaults: { _controller: FOSUserBundle:Security:logout }
+
+index:
+    path:     /
+    defaults: { _controller: BloggerBlogBundle:Page:index }
+
+blogger_post_view:
+    path:     /view/{id}
+    defaults: { _controller: BloggerBlogBundle:Post:view }
+    requirements:
+      id: \d+
+
+blogger_post_create:
+    path:     /create
+    defaults: { _controller: BloggerBlogBundle:Post:create }
+
+blogger_post_edit:
+    path:     /edit/{id}
+    defaults: { _controller: BloggerBlogBundle:Post:edit }
+    requirements:
+      id: \d+
+
+blogger_post_delete:
+    path:     /delete/{id}
+    defaults: { _controller: BloggerBlogBundle:Post:delete }
+    requirements:
+      id: \d+
