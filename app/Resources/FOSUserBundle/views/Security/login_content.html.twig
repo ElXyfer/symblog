@@ -24,4 +24,6 @@
     <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
 
     <input type="submit" id="_submit" class="btn btn-default" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+    <br>
+    <p>Not a member? <a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }} now!</a></p>
 </form>
