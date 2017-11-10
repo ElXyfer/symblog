@@ -45,6 +45,7 @@
                         {% if not is_granted("ROLE_USER") %}
                             <li><a href="{{ path('blogger_login') }}">Login</a></li>
                         {% else %}
+                            <li><a href="{{ path('blogger_post_create') }}">Create post</a></li>
                             <li><a href="{{ path('blogger_logout') }}">Logout</a></li>
                         {% endif %}
 
