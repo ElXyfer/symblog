@@ -1,6 +1,6 @@
 <?php
 
-namespace Blogger\BlogBundle\Repository;
+namespace Blogger\UserBundle\Repository;
 
 /**
  * UserRepository

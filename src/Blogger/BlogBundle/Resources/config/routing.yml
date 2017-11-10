@@ -2,18 +2,9 @@ blogger_blog_homepage:
     path:     /
     defaults: { _controller: BloggerBlogBundle:Page:index }
 
-
 blogger_about:
     path:     /about
     defaults: { _controller: BloggerBlogBundle:Page:about }
-
-blogger_login:
-    path:     /login
-    defaults: { _controller: FOSUserBundle:Security:login }
-
-blogger_logout:
-    path:     /logout
-    defaults: { _controller: FOSUserBundle:Security:logout }
 
 index:
     path:     /

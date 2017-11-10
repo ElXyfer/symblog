@@ -1,6 +1,6 @@
 <?php
 
-namespace Blogger\BlogBundle\Entity;
+namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -9,7 +9,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * User
  *
  * @ORM\Table(name="ws_user")
- * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Blogger\UserBundle\Repository\UserRepository")
  */
 class User extends  BaseUser
 {
