@@ -165,28 +165,5 @@ class Book
     {
         return $this->yearPublished;
     }
-
-    /**
-     * Set submittedBy
-     *
-     * @param \UserBundle\Entity\User $submittedBy
-     *
-     * @return Book
-     */
-    public function setSubmittedBy(\UserBundle\Entity\User $submittedBy = null)
-    {
-        $this->submitted_by = $submittedBy;
-
-        return $this;
-    }
-
-    /**
-     * Get submittedBy
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getSubmittedBy()
-    {
-        return $this->submitted_by;
-    }
 }
+
