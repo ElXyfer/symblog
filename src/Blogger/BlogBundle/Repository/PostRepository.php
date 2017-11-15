@@ -10,12 +10,25 @@ namespace Blogger\BlogBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getLatest($limit, $offset)
+    public function getLatest($limit, $offset, $userID)
     {
         $queryBuilder = $this->createQueryBuilder('post');
-        $queryBuilder-> orderBy('post.published', 'DESC')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit);
+
+        if ($userID != null)
+        {
+            $queryBuilder
+                ->where('post.user = ' . $userID)
+                -> orderBy('post.id', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults($limit);
+        }
+        else {
+            $queryBuilder
+                -> orderBy('post.id', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults($limit);
+        }
+
 
         $query = $queryBuilder->getQuery();
 

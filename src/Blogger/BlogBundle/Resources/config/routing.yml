@@ -31,3 +31,12 @@ blogger_post_delete:
     defaults: { _controller: BloggerBlogBundle:Post:delete }
     requirements:
       id: \d+
+
+user_login:
+    path:     /login
+    defaults: { _controller: FOSUserBundle:Security:login }
+
+user_logout:
+    path:     /logout
+    defaults: { _controller: FOSUserBundle:Security:logout }
+

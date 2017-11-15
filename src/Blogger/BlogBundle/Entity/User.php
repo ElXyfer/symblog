@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Entity;
+namespace Blogger\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -9,7 +9,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * User
  *
  * @ORM\Table(name="ws_user")
- * @ORM\Entity(repositoryClass="Blogger\UserBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Repository\UserRepository")
  */
 class User extends  BaseUser
 {
@@ -21,7 +21,7 @@ class User extends  BaseUser
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\OneToMany(targetEntity="Blogger\BookBundle\Entity\Book", mappedBy="submitted_by")
+     * @ORM\OneToMany(targetEntity="Blogger\BlogBundle\Entity\Book", mappedBy="submitted_by")
      */
     private $books;
 
@@ -78,11 +78,11 @@ class User extends  BaseUser
     /**
      * Add book
      *
-     * @param \Blogger\BookBundle\Entity\Book $book
+     * @param \Blogger\BlogBundle\Entity\Book $book
      *
      * @return User
      */
-    public function addBook(\Blogger\BookBundle\Entity\Book $book)
+    public function addBook(\Blogger\BlogBundle\Entity\Book $book)
     {
         $this->books[] = $book;
 
@@ -92,9 +92,9 @@ class User extends  BaseUser
     /**
      * Remove book
      *
-     * @param \Blogger\BookBundle\Entity\Book $book
+     * @param \Blogger\BlogBundle\Entity\Book $book
      */
-    public function removeBook(\Blogger\BookBundle\Entity\Book $book)
+    public function removeBook(\Blogger\BlogBundle\Entity\Book $book)
     {
         $this->books->removeElement($book);
     }

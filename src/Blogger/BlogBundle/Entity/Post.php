@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Post
 {
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="posts")
+     * @ORM\ManyToOne(targetEntity="Blogger\BlogBundle\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

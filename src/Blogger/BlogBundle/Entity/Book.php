@@ -1,6 +1,6 @@
 <?php
 
-namespace Blogger\BookBundle\Entity;
+namespace Blogger\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Book
  *
  * @ORM\Table(name="books")
- * @ORM\Entity(repositoryClass="Blogger\BookBundle\Repository\BookRepository")
+ * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Repository\UserRepository")
  */
 class Book
 {
@@ -25,8 +25,8 @@ class Book
     /**
      * @var string
      *
-     * @var \UserBundle\Entity\User
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="books")
+     * @var \Blogger\BlogBundle\Entity\User
+     * @ORM\ManyToOne(targetEntity="Blogger\BlogBundle\Entity\User", inversedBy="books")
      * @ORM\JoinColumn(name="submitted_by", referencedColumnName="id")
      */
     private $submitted_by;
@@ -165,5 +165,28 @@ class Book
     {
         return $this->yearPublished;
     }
-}
 
+    /**
+     * Set submittedBy
+     *
+     * @param \Blogger\BlogBundle\Entity\User $submittedBy
+     *
+     * @return Book
+     */
+    public function setSubmittedBy(\Blogger\BlogBundle\Entity\User $submittedBy = null)
+    {
+        $this->submitted_by = $submittedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get submittedBy
+     *
+     * @return \Blogger\BlogBundle\Entity\User
+     */
+    public function getSubmittedBy()
+    {
+        return $this->submitted_by;
+    }
+}

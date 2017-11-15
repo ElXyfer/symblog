@@ -1,11 +1,3 @@
-book:
-    resource: "@BookBundle/Resources/config/routing.yml"
-    prefix:   /
-
-user:
-    resource: "@UserBundle/Resources/config/routing.yml"
-    prefix:   /
-
 blogger_blog:
     resource: "@BloggerBlogBundle/Resources/config/routing.yml"
     prefix:   /
