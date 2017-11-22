@@ -37,7 +37,7 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         // validate the form
-        if($form->isValid()) {
+        if($form->isSubmitted()) {
 
             // Retrieve the doctrine entity manager
             $em = $this->getDoctrine()->getManager();
@@ -68,14 +68,16 @@ class PostController extends Controller
     public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
         $blogPost = $em->getRepository('BloggerBlogBundle:Post')->find($id);
+
         $form = $this->createForm(PostType::class, $blogPost,
             ['action' => $request->getUri()
             ]);
 
         $form->handleRequest($request);
 
-        if($form->isValid()) {
+        if($form->isSubmitted()) {
             $em->flush();
 
             return $this->redirect($this->generateUrl('blogger_post_view',
@@ -91,10 +93,13 @@ class PostController extends Controller
     public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+
         $blogPost = $em->getRepository('BloggerBlogBundle:Post')->find($id);
 
         $em->remove($blogPost);
+
         $em->flush();
+
         return $this->redirect($this->generateUrl('blogger_blog_homepage'));
     }
 

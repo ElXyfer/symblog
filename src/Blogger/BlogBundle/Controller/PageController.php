@@ -16,19 +16,28 @@ class PageController extends Controller
         }
     }
 
-    public function indexAction()
+    public function indexAction(){
+//        $em = $this->getDoctrine()->getManager();
+//        $blogPost = $em->getRepository('BloggerBlogBundle:Post')
+//            ->getLatest(10, 0, $this->getCurrentUserID());
+//        return $this->render('BloggerBlogBundle:Page:index.html.twig',
+//            ['blogposts' => $blogPost]);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $bookPost = $entityManager->getRepository('BloggerBlogBundle:Book')
+                ->getLatest(10, 0, $this->getCurrentUserID()); //
+        return $this->render('BloggerBlogBundle:Page:index.html.twig',
+            ['bookposts' => $bookPost]);
+    }
+
+    public function authorAction()
     {
         $em = $this->getDoctrine()->getManager();
         $blogPost = $em->getRepository('BloggerBlogBundle:Post')
                 ->getLatest(10, 0, $this->getCurrentUserID());
-        return $this->render('BloggerBlogBundle:Page:index.html.twig',
+        return $this->render('BloggerBlogBundle:Page:author.html.twig',
             ['blogposts' => $blogPost]);
 
-    }
-
-    public function aboutAction()
-    {
-        return $this->render('BloggerBlogBundle:Page:about.html.twig');
     }
 
 }

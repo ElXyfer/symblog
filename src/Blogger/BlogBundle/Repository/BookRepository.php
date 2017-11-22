@@ -10,4 +10,28 @@ namespace Blogger\BlogBundle\Repository;
  */
 class BookRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getLatest($limit, $offset, $userID)
+    {
+        $queryBuilder = $this->createQueryBuilder('book');
+
+        if ($userID != null)
+        {
+            $queryBuilder
+                ->where('book.submittedBy = ' . $userID)
+                -> orderBy('book.id', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults($limit);
+        }
+        else {
+            $queryBuilder
+                -> orderBy('book.id', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults($limit);
+        }
+
+
+        $query = $queryBuilder->getQuery();
+
+        return $query->getResult();
+    }
 }

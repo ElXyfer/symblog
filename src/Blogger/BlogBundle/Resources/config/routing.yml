@@ -2,9 +2,9 @@ blogger_blog_homepage:
     path:     /
     defaults: { _controller: BloggerBlogBundle:Page:index }
 
-blogger_about:
-    path:     /about
-    defaults: { _controller: BloggerBlogBundle:Page:about }
+blogger_author:
+    path:     /my_posts
+    defaults: { _controller: BloggerBlogBundle:Page:author }
 
 index:
     path:     /
@@ -40,3 +40,24 @@ user_logout:
     path:     /logout
     defaults: { _controller: FOSUserBundle:Security:logout }
 
+blogger_book_view:
+    path:     /book_view/{id}
+    defaults: { _controller: BloggerBlogBundle:Book:view }
+    requirements:
+          id: \d+
+
+blogger_book_create:
+    path:     /book_create
+    defaults: { _controller: BloggerBlogBundle:Book:create }
+
+blogger_book_edit:
+    path:     /book_edit/{id}
+    defaults: { _controller: BloggerBlogBundle:Book:edit }
+    requirements:
+          id: \d+
+
+blogger_book_delete:
+    path:     /book_delete/{id}
+    defaults: { _controller: BloggerBlogBundle:Book:delete }
+    requirements:
+          id: \d+

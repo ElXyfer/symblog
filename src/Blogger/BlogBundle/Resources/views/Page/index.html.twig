@@ -2,17 +2,31 @@
 
 
 {% block body %}
+    {#<h1>Welcome{% if is_granted("ROLE_USER") %}{{ ', ' ~ app.user.username }}{% endif %}!</h1>#}
+    {#{% for post in blogposts %}#}
+        {#<article>#}
+            {#<h2><a href="{{ path('blogger_post_view', {id : post.id}) }}">#}
+                    {#{{ post.title | title }}</a></h2>#}
+
+            {#<p>{{ post.content | nl2br }}</p>#}
+
+            {#<p>#}
+                {#<small>Created by {{ post.user }} at {{ post.published | date('H:i d/m/y') }}</small>#}
+            {#</p>#}
+        {#</article>#}
+
 <h1>Welcome{% if is_granted("ROLE_USER") %}{{ ', ' ~ app.user.username }}{% endif %}!</h1>
-    {% for post in blogposts %}
-        <article>
-            <h2><a href="{{ path('blogger_post_view', {id : post.id}) }}">
-                    {{ post.title | title }}</a></h2>
+{% for book in bookposts %}
+    <article>
+        <h2><a href="{{ path('blogger_book_view', {id : book.id}) }}">
+                {{ book.title | title }}</a></h2>
 
-            <p>{{ post.content | nl2br }}</p>
-
-            <p>
-                <small>Created by {{ post.user }} at {{ post.published | date('H:i d/m/y') }}</small>
-            </p>
-        </article>
+        <p>{{ book.bookAuthor }}</p>
+        <p>{{ book.picture }}</p>
+        <p>{{ book.yearPublished | date('d/m/y') }}</p>
+        <p>
+            <small>Created by {{ book.submittedBy }}</small>
+        </p>
+    </article>
     {% endfor %}
 {% endblock %}
