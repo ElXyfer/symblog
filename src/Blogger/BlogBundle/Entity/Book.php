@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Book
  *
  * @ORM\Table(name="books")
- * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Repository\BookRepository")
  */
 class Book
 {
@@ -29,7 +29,7 @@ class Book
      * @ORM\ManyToOne(targetEntity="Blogger\BlogBundle\Entity\User", inversedBy="books")
      * @ORM\JoinColumn(name="submitted_by", referencedColumnName="id")
      */
-    private $submitted_by;
+    private $submittedBy;
 
     /**
      * @var string
@@ -175,7 +175,7 @@ class Book
      */
     public function setSubmittedBy(\Blogger\BlogBundle\Entity\User $submittedBy = null)
     {
-        $this->submitted_by = $submittedBy;
+        $this->submittedBy = $submittedBy;
 
         return $this;
     }
@@ -187,6 +187,6 @@ class Book
      */
     public function getSubmittedBy()
     {
-        return $this->submitted_by;
+        return $this->submittedBy;
     }
 }

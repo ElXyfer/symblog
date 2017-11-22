@@ -1,0 +1,10 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}BloggerBlogBundle:Book:edit{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Book:edit page</h1>
+
+    {{ form(form) }}
+    <p><a href="{{ path('blogger_book_delete',{id: book.id}) }}">delete</a></p>
+{% endblock %}

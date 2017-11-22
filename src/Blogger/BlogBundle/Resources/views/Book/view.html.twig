@@ -1,0 +1,16 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block body %}
+    <h3>{{ book.title }}</h3>
+
+    <p><small>By {{ book.submittedBy }}
+        </small>
+        <a href="{{ path('blogger_book_edit', {'id': book.id}) }}">edit</a>
+    </p>
+    <p>Author: {{ book.bookAuthor }}</p>
+    <p>Publish date: {{ book.yearPublished|date('d/m/y') }}</p>
+    <p>{{ book.picture }}</p>
+
+{% endblock %}

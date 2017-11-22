@@ -21,7 +21,7 @@ class User extends  BaseUser
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\OneToMany(targetEntity="Blogger\BlogBundle\Entity\Book", mappedBy="submitted_by")
+     * @ORM\OneToMany(targetEntity="Blogger\BlogBundle\Entity\Book", mappedBy="submittedBy")
      */
     private $books;
 

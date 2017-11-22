@@ -34,3 +34,6 @@ security:
         - { path: ^/create, role: ROLE_USER }
         - { path: ^/edit, role: ROLE_USER }
         - { path: ^/delete, role: ROLE_USER }
+        - { path: ^/book_create, role: ROLE_USER }
+        - { path: ^/book_edit, role: ROLE_USER }
+        - { path: ^/book_delete, role: ROLE_USER }
