@@ -5,6 +5,7 @@ namespace Blogger\BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blogger\BlogBundle\Entity\Book;
 use Blogger\BlogBundle\Form\BookType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 class BookController extends Controller
@@ -37,6 +38,26 @@ class BookController extends Controller
             $bookPost->setSubmittedBy($this->getUser());
 
             $bookPost->setTimeStamp(new \DateTime());
+
+            // image stuff
+
+            // $file stores the uploaded PDF file
+            /**
+             * @var UploadedFile $file
+             */
+
+            $file = $bookPost->getPicture();
+
+            // Generate a unique name for the file before saving it
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the picture to the directory where pictures are stored (config.yml)
+            $file->move(
+                $this->getParameter('picture_directory'), $fileName
+            );
+
+            // Update the 'picture' property to store the picture file name
+            $bookPost->setPicture($fileName);
 
             $entityManager->persist($bookPost);
 

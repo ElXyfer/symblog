@@ -3,11 +3,14 @@
 {% block title %}{{ book.title }}{% endblock %}
 
 {% block body %}
+
+    <img src="{{ asset('uploads/pictures/') ~ book.picture }}" width="200" height="200">
+
     <h2>{{ book.title }}</h2>
 
     <p>Author: {{ book.bookAuthor }}</p>
     <p>Publish date: {{ book.yearPublished|date('d/m/y') }}</p>
-    <p>{{ book.picture }}</p>
+
 
     <p><small>By {{ book.submittedBy }} </small><a href="{{ path('blogger_book_edit', {'id': book.id}) }}">edit</a></p>
 
@@ -22,7 +25,7 @@
             <hr>
             <h4>{{ post.title }}</h4>
 
-            <p><small>By {{ post.user }} on {{ post.published|date('H:i d/m/y') }}</small></p>
+            <p><small>By {{ post.user }}</a> on {{ post.published|date('H:i d/m/y') }}</small></p>
 
             <p>{{ post.content }}</p>
 
