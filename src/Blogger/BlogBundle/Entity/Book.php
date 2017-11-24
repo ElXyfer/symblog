@@ -2,6 +2,7 @@
 
 namespace Blogger\BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Book
 {
+
+    /**
+     * @ORM\OneToMany(targetEntity="Blogger\BlogBundle\Entity\Post", mappedBy="book")
+     */
+    private $posts;
 
     /**
      * @var int
@@ -58,6 +64,22 @@ class Book
      * @ORM\Column(name="year_published", type="date", nullable=true)
      */
     private $yearPublished;
+
+    /**
+     *
+     * @ORM\Column(name="time_stamp", type="datetime")
+     */
+
+    private $timeStamp;
+
+    /**
+     * Book constructor.
+     * @param $posts
+     */
+    public function __construct($posts)
+    {
+        $this->posts = new ArrayCollection();
+    }
 
 
     /**
@@ -189,4 +211,47 @@ class Book
     {
         return $this->submittedBy;
     }
+
+    /**
+     * Set timeStamp
+     *
+     * @param \DateTime $timeStamp
+     *
+     * @return Book
+     */
+    public function setTimeStamp($timeStamp)
+    {
+        $this->timeStamp = $timeStamp;
+
+        return $this;
+    }
+
+    /**
+     * Get timeStamp
+     *
+     * @return \DateTime
+     */
+    public function getTimeStamp()
+    {
+        return $this->timeStamp;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param mixed $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+    }
+
+
+
 }

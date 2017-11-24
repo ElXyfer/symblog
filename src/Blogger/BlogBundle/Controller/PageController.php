@@ -25,7 +25,7 @@ class PageController extends Controller
 
         $entityManager = $this->getDoctrine()->getManager();
         $bookPost = $entityManager->getRepository('BloggerBlogBundle:Book')
-                ->getLatest(10, 0, $this->getCurrentUserID()); //
+                ->getLatest(10, 0, null); //
         return $this->render('BloggerBlogBundle:Page:index.html.twig',
             ['bookposts' => $bookPost]);
     }

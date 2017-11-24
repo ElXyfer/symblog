@@ -17,8 +17,10 @@ blogger_post_view:
       id: \d+
 
 blogger_post_create:
-    path:     /create
+    path:     /create/{bookId}
     defaults: { _controller: BloggerBlogBundle:Post:create }
+    requirements:
+      bookId: \d+
 
 blogger_post_edit:
     path:     /edit/{id}
@@ -47,7 +49,7 @@ blogger_book_view:
           id: \d+
 
 blogger_book_create:
-    path:     /book_create
+    path:     /book_create/
     defaults: { _controller: BloggerBlogBundle:Book:create }
 
 blogger_book_edit:

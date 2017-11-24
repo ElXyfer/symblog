@@ -22,10 +22,12 @@ class PostController extends Controller
             ['post' => $blogPost]);
     }
 
-    public function createAction(Request $request)
+    public function createAction(Request $request, $bookId)
     {
         // Create an new (empty) Post entity
         $blogPost = new Post();
+        $em = $this->getDoctrine()->getManager();
+        $book = $em->getRepository("BloggerBlogBundle:Book")->find($bookId);
 
         // Create a form from the PostType class to be validated
         // against the Post entity and set the form action attribute to the current URI
@@ -48,6 +50,8 @@ class PostController extends Controller
             // manually set the date published to a new date time object
             $blogPost->setPublished(new  \DateTime());
 
+            $blogPost->setBook($book);
+
             // tell the entity manager we want to persist this entity
             $em->persist($blogPost);
 
@@ -55,8 +59,8 @@ class PostController extends Controller
             $em->flush();
 
             // Render the view from the twig file and pass the from to the view
-            return $this->redirect($this->generateUrl('blogger_post_view',
-                ['id' => $blogPost->getId()]));
+            return $this->redirect($this->generateUrl('blogger_book_view',
+                ['id' => $book->getId()]));
         }
 
 
