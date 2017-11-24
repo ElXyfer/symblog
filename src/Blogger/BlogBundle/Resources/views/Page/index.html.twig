@@ -22,11 +22,10 @@
     <article>
         <h2><a href="{{ path('blogger_book_view', {id : book.id}) }}">
                 {{ book.title | title }}</a></h2>
+        <img src="{{ asset('uploads/pictures/') ~ book.picture }}" width="200" height="200">
 
         <p>Author: {{ book.bookAuthor }}</p>
         <p>Published: {{ book.yearPublished | date('d/m/y') }}</p>
-        <p>{{ book.picture }}</p>
-        <p>
             <small>Posted by {{ book.submittedBy }} at {{ book.timeStamp|date('H:i d/m/y') }}</small>
         </p>
     </article>

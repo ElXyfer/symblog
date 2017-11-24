@@ -3,7 +3,7 @@ blogger_blog_homepage:
     defaults: { _controller: BloggerBlogBundle:Page:index }
 
 blogger_author:
-    path:     /my_posts
+    path:     /my_posts/
     defaults: { _controller: BloggerBlogBundle:Page:author }
 
 index:

@@ -4,6 +4,7 @@ namespace Blogger\BlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Book
@@ -53,7 +54,8 @@ class Book
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="please enter an image")
+     * @Assert\File(mimeTypes={ "picture" })
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      */
     private $picture;
