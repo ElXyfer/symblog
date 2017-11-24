@@ -19,6 +19,12 @@ class Post
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Blogger\BlogBundle\Entity\Book", inversedBy="posts")
+     * @ORM\JoinColumn(name="book_id", referencedColumnName="id")
+     */
+    private $book;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -151,6 +157,32 @@ class Post
     {
         return $this->user;
     }
+
+    /**
+     * Set content
+     *
+     * @param string $book
+     *
+     * @return Post
+     */
+    public function setBook($book)
+    {
+        $this->book = $book;
+
+        return $this;
+    }
+
+    /**
+     * Get book
+     *
+     * @return string
+     */
+    public function getBook()
+    {
+        return $this->book;
+    }
+
+
 
 
 }

@@ -22,7 +22,7 @@ class BookController extends Controller
 
     public function createAction(Request $request)
     {
-        $bookPost = new Book();
+        $bookPost = new Book(null);
 
         $form = $this->createForm(BookType::class, $bookPost,[
             'action' => $request->getUri()
@@ -35,6 +35,8 @@ class BookController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
 
             $bookPost->setSubmittedBy($this->getUser());
+
+            $bookPost->setTimeStamp(new \DateTime());
 
             $entityManager->persist($bookPost);
 

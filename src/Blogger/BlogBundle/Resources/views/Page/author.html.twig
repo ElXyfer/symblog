@@ -3,7 +3,7 @@
 {% block title %} My Posts {% endblock %}
 
 {% block body %}
-    <h1>Welcome{% if is_granted("ROLE_USER") %}{{ ', ' ~ app.user.username }}{% endif %}!</h1>
+    <h1>Welcome to your central Post Hub!</h1>
     {% for post in blogposts %}
         <article>
             <h2><a href="{{ path('blogger_post_view', {id : post.id}) }}">

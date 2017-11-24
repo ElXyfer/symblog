@@ -16,16 +16,18 @@
         {#</article>#}
 
 <h1>Welcome{% if is_granted("ROLE_USER") %}{{ ', ' ~ app.user.username }}{% endif %}!</h1>
+
+    <h3>Here are most recent books available for your reviewing pleasure ! </h3>
 {% for book in bookposts %}
     <article>
         <h2><a href="{{ path('blogger_book_view', {id : book.id}) }}">
                 {{ book.title | title }}</a></h2>
 
-        <p>{{ book.bookAuthor }}</p>
+        <p>Author: {{ book.bookAuthor }}</p>
+        <p>Published: {{ book.yearPublished | date('d/m/y') }}</p>
         <p>{{ book.picture }}</p>
-        <p>{{ book.yearPublished | date('d/m/y') }}</p>
         <p>
-            <small>Created by {{ book.submittedBy }}</small>
+            <small>Posted by {{ book.submittedBy }} at {{ book.timeStamp|date('H:i d/m/y') }}</small>
         </p>
     </article>
     {% endfor %}

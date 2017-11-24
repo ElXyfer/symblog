@@ -3,14 +3,30 @@
 {% block title %}{{ book.title }}{% endblock %}
 
 {% block body %}
-    <h3>{{ book.title }}</h3>
+    <h2>{{ book.title }}</h2>
 
-    <p><small>By {{ book.submittedBy }}
-        </small>
-        <a href="{{ path('blogger_book_edit', {'id': book.id}) }}">edit</a>
-    </p>
     <p>Author: {{ book.bookAuthor }}</p>
     <p>Publish date: {{ book.yearPublished|date('d/m/y') }}</p>
     <p>{{ book.picture }}</p>
+
+    <p><small>By {{ book.submittedBy }} </small><a href="{{ path('blogger_book_edit', {'id': book.id}) }}">edit</a></p>
+
+    <a href="{{ path('blogger_post_create', {'bookId': book.id }) }}">Review this book</a>
+
+    <hr>
+    <h3>Reviews</h3>
+
+    {% if book.posts %}
+        {% for post in book.posts %}
+
+            <hr>
+            <h4>{{ post.title }}</h4>
+
+            <p><small>By {{ post.user }} on {{ post.published|date('H:i d/m/y') }}</small></p>
+
+            <p>{{ post.content }}</p>
+
+        {% endfor %}
+    {% endif %}
 
 {% endblock %}
