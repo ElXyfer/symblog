@@ -39,7 +39,7 @@
                 <a class="navbar-brand" href="#">Rate a book</a>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ path('index') }}">Home</a></li>
+                        <li><a href="{{ path('index', {'page':1}) }}">Home</a></li>
                         {#<li><a href="#">Contact</a></li>#}
                         {% if not is_granted("ROLE_USER") %}
                             <li><a href="{{ path('user_login') }}">Login</a></li>

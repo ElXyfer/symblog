@@ -20,7 +20,29 @@ class BookController extends Controller
             ['book' => $bookPost]);
 
     }
+    public function FileHelper(Book $bookPost) {
+        // image stuff
 
+        // $file stores the uploaded PDF file
+        /**
+         * @var UploadedFile $file
+         */
+
+        $file = $bookPost->getPicture();
+
+        // Generate a unique name for the file before saving it
+        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+        // Move the picture to the directory where pictures are stored (config.yml)
+        $file->move(
+            $this->getParameter('picture_directory'), $fileName
+        );
+
+        // Update the 'picture' property to store the picture file name
+        $bookPost->setPicture($fileName);
+
+
+    }
     public function createAction(Request $request)
     {
         $bookPost = new Book(null);
@@ -39,25 +61,7 @@ class BookController extends Controller
 
             $bookPost->setTimeStamp(new \DateTime());
 
-            // image stuff
-
-            // $file stores the uploaded PDF file
-            /**
-             * @var UploadedFile $file
-             */
-
-            $file = $bookPost->getPicture();
-
-            // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-
-            // Move the picture to the directory where pictures are stored (config.yml)
-            $file->move(
-                $this->getParameter('picture_directory'), $fileName
-            );
-
-            // Update the 'picture' property to store the picture file name
-            $bookPost->setPicture($fileName);
+            $this->FileHelper($bookPost);
 
             $entityManager->persist($bookPost);
 
@@ -84,6 +88,11 @@ class BookController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
+
+            $this->FileHelper($bookPost);
+
+            $entityManager->persist($bookPost);
+
             $entityManager->flush();
 
             return $this->redirect($this->generateUrl('blogger_book_view',
@@ -105,7 +114,7 @@ class BookController extends Controller
 
         $entityManager->flush();
 
-        return $this->redirect($this->generateUrl('blogger_blog_homepage'));
+        return $this->redirect($this->generateUrl('index'));
     }
 
 }

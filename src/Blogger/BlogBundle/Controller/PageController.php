@@ -40,4 +40,21 @@ class PageController extends Controller
 
     }
 
+    public function paginationAction($page = 1) {
+        $booksPerPage = 3;
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $bookCount = $entityManager->getRepository('BloggerBlogBundle:Book')->countBooks();
+
+        $pageCount = ceil($bookCount / $booksPerPage);
+
+        $bookPosts = $entityManager->getRepository('BloggerBlogBundle:Book')
+            ->getPage($booksPerPage, $page, $this->getCurrentUserID());
+
+        return $this->render('BloggerBlogBundle:Page:index.html.twig',
+            ['bookposts' => $bookPosts, 'pagecount' => $pageCount]);
+    }
+
+
 }
