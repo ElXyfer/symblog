@@ -1,14 +1,15 @@
-blogger_blog_homepage:
-    path:     /
-    defaults: { _controller: BloggerBlogBundle:Page:index }
-
+#blogger_blog_homepage:
+#    path:     /
+#    defaults: { _controller: BloggerBlogBundle:Page:index }
 blogger_author:
     path:     /my_posts/
     defaults: { _controller: BloggerBlogBundle:Page:author }
 
 index:
-    path:     /
-    defaults: { _controller: BloggerBlogBundle:Page:index }
+    path:     /{page}
+    defaults: { _controller: BloggerBlogBundle:Page:pagination, page:1 }
+    requirements:
+        page: \d+
 
 blogger_post_view:
     path:     /view/{id}

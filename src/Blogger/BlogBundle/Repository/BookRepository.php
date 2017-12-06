@@ -13,12 +13,13 @@ class BookRepository extends \Doctrine\ORM\EntityRepository
     public function getLatest($limit, $offset, $userID)
     {
         $queryBuilder = $this->createQueryBuilder('book');
+        $userID = null;
 
         if ($userID != null)
         {
             $queryBuilder
                 ->where('book.submittedBy = ' . $userID)
-                -> orderBy('book.id', 'DESC')
+                ->orderBy('book.id', 'DESC')
                 ->setFirstResult($offset)
                 ->setMaxResults($limit);
         }
@@ -33,5 +34,19 @@ class BookRepository extends \Doctrine\ORM\EntityRepository
         $query = $queryBuilder->getQuery();
 
         return $query->getResult();
+    }
+
+    public function getPage($booksPerPage, $currentPage = 1, $userID) {
+        $offset = ($currentPage - 1) * $booksPerPage;
+        return $this->getLatest($booksPerPage, $offset, $userID);
+
+    }
+
+    public function countBooks() {
+        $queryBuilder = $this->createQueryBuilder('book');
+        $queryBuilder->select('COUNT(book)');
+        $count = $queryBuilder->getQuery()->getSingleScalarResult();
+        return $count;
+
     }
 }

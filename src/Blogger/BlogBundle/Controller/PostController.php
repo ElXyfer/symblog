@@ -104,7 +104,7 @@ class PostController extends Controller
 
         $em->flush();
 
-        return $this->redirect($this->generateUrl('blogger_blog_homepage'));
+        return $this->redirect($this->generateUrl('index'));
     }
 
 }
