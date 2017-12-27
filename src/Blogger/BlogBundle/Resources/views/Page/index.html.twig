@@ -17,7 +17,7 @@
 
 <h1>Welcome{% if is_granted("ROLE_USER") %}{{ ', ' ~ app.user.username }}{% endif %}!</h1>
 
-    <h3>Here are most recent books available for your reviewing pleasure ! </h3>
+    <h3>Here are the most recent books available for your reviewing pleasure ! </h3>
 {% for book in bookposts %}
     <article>
         <h2><a href="{{ path('blogger_book_view', {id : book.id}) }}">
