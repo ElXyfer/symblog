@@ -16,6 +16,14 @@ class BookController extends Controller
 
         $bookPost = $entityManager->getRepository('BloggerBlogBundle:Book')->find($id);
 
+        if(empty($bookPost)){
+            return $this->redirect($this->generateUrl('index'));
+        }
+
+//        if($bookPost->getSubmittedBy()->getId() != $this->getUser()->getId()) {
+//            return $this->redirect($this->generateUrl('index'));
+//        }
+
         return $this->render('BloggerBlogBundle:Book:view.html.twig',
             ['book' => $bookPost]);
 
@@ -81,11 +89,6 @@ class BookController extends Controller
 
         $bookPost = $entityManager->getRepository('BloggerBlogBundle:Book')->find($id);
 
-        if(empty($bookPost)){
-//            return $this->render('BloggerBlogBundle:Page:view.html.twig',
-//                ['book' => $bookPost]);
-
-        }
 
         $form = $this->createForm(BookType::class, $bookPost,
             ['action' => $request->getUri()

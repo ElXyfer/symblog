@@ -54,6 +54,15 @@ class Post
 
     private $published;
 
+    /**
+     *
+     * @var float
+     *
+     * @ORM\Column(name="rating", type="float")
+     */
+
+    private $rating;
+
 
     /**
      * Get id
@@ -180,6 +189,22 @@ class Post
     public function getBook()
     {
         return $this->book;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRating(): float
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param float $rating
+     */
+    public function setRating(float $rating)
+    {
+        $this->rating = $rating;
     }
 
 

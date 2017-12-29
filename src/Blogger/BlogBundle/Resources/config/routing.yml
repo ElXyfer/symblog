@@ -5,6 +5,12 @@ blogger_author:
     path:     /my_posts/
     defaults: { _controller: BloggerBlogBundle:Page:author }
 
+blogger_stranger:
+    path:     /users/{id}
+    defaults: { _controller: BloggerBlogBundle:Page:stranger, id: 1 }
+    requirements:
+          id: \d+
+
 index:
     path:     /{page}
     defaults: { _controller: BloggerBlogBundle:Page:pagination, page:1 }
@@ -64,3 +70,15 @@ blogger_book_delete:
     defaults: { _controller: BloggerBlogBundle:Book:delete }
     requirements:
           id: \d+
+
+view:
+    path:     admin_view
+    defaults: { _controller: BloggerBlogBundle:Admin:view }
+
+edit:
+    path:     admin_edit
+    defaults: { _controller: BloggerBlogBundle:Admin:edit }
+
+delete:
+    path:     admin_delete
+    defaults: { _controller: BloggerBlogBundle:Admin:delete }

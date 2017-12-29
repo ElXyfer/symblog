@@ -7,7 +7,10 @@
 
         <p><small>By {{ post.user }} on {{ post.published|date('H:i d/m/y') }}
             </small>
-        <a href="{{ path('blogger_post_edit', {'id': post.id}) }}">edit</a>
+        {% if post.user == app.user %}
+            <a href="{{ path('blogger_post_edit', {'id': post.id}) }}">edit</a>
+        {% endif %}
         </p>
     <p>{{ post.content|nl2br }}</p>
+
 {% endblock %}

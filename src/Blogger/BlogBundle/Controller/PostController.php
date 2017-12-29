@@ -75,6 +75,10 @@ class PostController extends Controller
 
         $blogPost = $em->getRepository('BloggerBlogBundle:Post')->find($id);
 
+        if ($blogPost->getUser() != $this->getUser()) {
+            return $this->redirect($this->generateUrl('index'));
+        }
+
         $form = $this->createForm(PostType::class, $blogPost,
             ['action' => $request->getUri()
             ]);

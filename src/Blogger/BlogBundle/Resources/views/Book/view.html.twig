@@ -34,10 +34,14 @@
             <td>{{ book.yearPublished|date('d/m/y') }}</td>
         </tr>
 
+        {% if book.submittedBy == app.user %}
+
         <tr>
             <th scope="row">Edit post:</th>
             <td><a href="{{ path('blogger_book_edit', {'id': book.id}) }}">{{ book.submittedBy }}</a></td>
         </tr>
+
+        {% endif %}
 
         {#<tr>#}
             {#<th scope="row"><a href="{{ path('blogger_post_create', {'bookId': book.id }) }}">Review this book</a></th>#}
@@ -56,9 +60,9 @@
         {% for post in book.posts %}
 
             <hr>
-            <h4>{{ post.title }}</h4>
+            <h4>{{ post.rating }}/5 - {{ post.title }}</h4>
 
-            <p><small>By {{ post.user }} on {{ post.published|date('H:i d/m/y') }}</small></p>
+            <p><small>By <a href="{{ path('blogger_stranger', {'id': post.user.id }) }}">{{ post.user }}</a> on {{ post.published|date('H:i d/m/y') }}</small></p>
 
             <p>{{ post.content }}</p>
 
