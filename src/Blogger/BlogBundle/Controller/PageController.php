@@ -33,10 +33,10 @@ class PageController extends Controller
     public function authorAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $blogPost = $em->getRepository('BloggerBlogBundle:Post')
+        $blogPosts = $em->getRepository('BloggerBlogBundle:Post')
                 ->getLatest(10, 0, $this->getCurrentUserID());
         return $this->render('BloggerBlogBundle:Page:author.html.twig',
-            ['blogposts' => $blogPost]);
+            ['blogposts' => $blogPosts]);
 
     }
 
@@ -54,6 +54,20 @@ class PageController extends Controller
 
         return $this->render('BloggerBlogBundle:Page:index.html.twig',
             ['bookposts' => $bookPosts, 'pagecount' => $pageCount]);
+    }
+
+    public function strangerAction($id = 1) {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $blogPosts = $em->getRepository('BloggerBlogBundle:Post')->getLatest(10, 0, $id);
+
+        if(empty($blogPosts)){
+            return $this->redirect($this->generateUrl('index'));
+        }
+
+        return $this->render('BloggerBlogBundle:Page:author.html.twig',
+            ['blogposts' => $blogPosts]);
     }
 
 

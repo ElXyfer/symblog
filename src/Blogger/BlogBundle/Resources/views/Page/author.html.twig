@@ -3,11 +3,11 @@
 {% block title %} My Posts {% endblock %}
 
 {% block body %}
-    <h1>Welcome to your central Post Hub!</h1>
+    <h1>{{  blogposts[0].user }}'s post HUB</h1>
     {% for post in blogposts %}
         <article>
             <h2><a href="{{ path('blogger_post_view', {id : post.id}) }}">
-                    {{ post.title | title }}</a></h2>
+                    {{ post.rating }}/5 - {{ post.title | title }}</a></h2>
 
             <p>{{ post.content | nl2br }}</p>
 

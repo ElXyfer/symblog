@@ -15,7 +15,7 @@ class PostType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('content', TextareaType::class, ['attr' => array('placeholder' => 'Enter your review, 250 max characters.')])->add('submit',SubmitType::class);
+        $builder->add('title')->add('content', TextareaType::class, ['attr' => array('placeholder' => 'Enter your review, 250 max characters.')])->add('rating')->add('submit',SubmitType::class);
     }
     
     /**
