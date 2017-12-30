@@ -8,16 +8,38 @@ class AdminController extends Controller
 {
     public function viewAction()
     {
-        return $this->render('BloggerBlogBundle:Admin:view.html.twig', array(
-            // ...
-        ));
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $allUsers = $entityManager->getRepository('BloggerBlogBundle:User')->findAll();
+
+
+        return $this->render('BloggerBlogBundle:Admin:view.html.twig', ['allUsers' => $allUsers]);
     }
 
-    public function editAction()
+    public function editAction($id, Request $request)
     {
-        return $this->render('BloggerBlogBundle:Admin:edit.html.twig', array(
-            // ...
-        ));
+        $entityManager = $this->getDoctrine()->getManager();
+                $user = $entityManager->getRepository('BloggerBlogBundle:User')->find($id);
+
+                $form = $this->createForm(PostType::class, $user, [
+                        'action' => $request->getUri()
+                        ]);
+
+                $form->handleRequest($request);
+
+
+                if($form->isValid()){
+
+                    $entityManager->flush();
+                    return $this->redirect($this->generateUrl('admin_user_view',
+                            ['id' => $user->getId()]));
+         }
+
+         return $this->render('BloggerBlogBundle:Admin:edit.html.twig', [
+                    'form' => $form->createView(),
+                    'user' => $user
+                    ]);
     }
 
     public function deleteAction()
