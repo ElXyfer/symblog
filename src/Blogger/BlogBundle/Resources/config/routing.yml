@@ -71,14 +71,18 @@ blogger_book_delete:
     requirements:
           id: \d+
 
-view:
+admin_user_view:
     path:     admin_view
     defaults: { _controller: BloggerBlogBundle:Admin:view }
 
-edit:
+admin_user_edit:
     path:     admin_edit
     defaults: { _controller: BloggerBlogBundle:Admin:edit }
+    requirements:
+          id: \d+
 
-delete:
+admin_user_delete:
     path:     admin_delete
     defaults: { _controller: BloggerBlogBundle:Admin:delete }
+    requirements:
+              id: \d+

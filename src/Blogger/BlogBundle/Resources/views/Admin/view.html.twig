@@ -4,4 +4,46 @@
 
 {% block body %}
 <h1>Welcome to the Admin:view page</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col"><h2></h2></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for allUsers in allUsers %}
+        <tr>
+            <th scope="row">ID</th>
+            <td>{{ allUsers.id }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Username</th>
+            <td>{{ allUsers.username }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Email</th>
+            <td>{{ allUsers.email }}</td>
+
+        </tr>
+        <tr>
+            {% for role in allUsers.roles %}
+                <th scope="row">Role(s)</th>
+                <td>{{ role }}</td>
+
+            {% endfor %}
+        </tr>
+        <tr>
+            <th scope="row">Edit</th>
+            <td><a href="{{ path('admin_user_edit',{'id':allUsers.id}) }}">edit</a></td>
+        </tr>
+
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

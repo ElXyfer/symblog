@@ -10,4 +10,7 @@ namespace Blogger\BlogBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllUsers(){
+        return $this->createQueryBuilder('ws_user')->select('*')->getQuery()->getResult();
+    }
 }
