@@ -62,9 +62,11 @@
             <hr>
             <h4>{{ post.rating }}/5 - {{ post.title }}</h4>
 
+            <p>{{ post.content }}</p>
+
             <p><small>By <a href="{{ path('blogger_stranger', {'id': post.user.id }) }}">{{ post.user }}</a> on {{ post.published|date('H:i d/m/y') }}</small></p>
 
-            <p>{{ post.content }}</p>
+
 
         {% endfor %}
     {% endif %}
