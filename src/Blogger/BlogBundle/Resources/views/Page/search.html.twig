@@ -1,0 +1,14 @@
+{% extends "BloggerBlogBundle::layout.html.twig" %}
+
+{% block body %}
+    {{ form_start(form, {
+        'attr': {'class': 'navbar-form navbar-right', 'action': path('search_handling')}
+    }) }}
+
+    {{ form_widget(form.search, {
+        'attr': {'class': 'form-control search-query'}
+    }) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}

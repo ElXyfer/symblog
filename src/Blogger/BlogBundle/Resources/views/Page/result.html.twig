@@ -1,0 +1,10 @@
+{% extends "BloggerBlogBundle::layout.html.twig" %}
+
+{% block body %}
+    {% for book in books %}
+        <p>{{ book.title }}</p>
+        <p>{{ book.bookAuthor }}</p>
+        <p>{{ book.description }}</p>
+        {% endfor %}
+
+{% endblock %}

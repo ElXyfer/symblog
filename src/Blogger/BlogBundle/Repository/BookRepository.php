@@ -49,4 +49,14 @@ class BookRepository extends \Doctrine\ORM\EntityRepository
         return $count;
 
     }
+
+    public function getBooksBySearch($string) {
+        $dql = $this->createQueryBuilder('book')
+            ->where('book.title LIKE :term')
+            ->orWhere('book.bookAuthor LIKE :term')
+            ->orWhere('book.description LIKE :term')
+            ->setParameter('term', '%' . $string . '%');
+        $query = $dql->getQuery();
+        return $query->getResult();
+    }
 }

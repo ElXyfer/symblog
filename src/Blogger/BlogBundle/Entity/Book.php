@@ -54,6 +54,13 @@ class Book
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * @var string
      * @Assert\NotBlank(message="please enter an image")
      * @Assert\File(mimeTypes={ "picture" })
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
@@ -253,6 +260,24 @@ class Book
     {
         $this->posts = $posts;
     }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description)
+    {
+        $this->description = $description;
+    }
+
+
 
 
 }
