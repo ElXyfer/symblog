@@ -43,10 +43,12 @@ class PageController extends Controller
     }
 
     public function paginationAction($page = 1) {
+        // limit of books per page
         $booksPerPage = 3;
 
         $entityManager = $this->getDoctrine()->getManager();
 
+        // call count books from book repo
         $bookCount = $entityManager->getRepository('BloggerBlogBundle:Book')->countBooks();
 
         $pageCount = ceil($bookCount / $booksPerPage);
@@ -57,6 +59,8 @@ class PageController extends Controller
         return $this->render('BloggerBlogBundle:Page:index.html.twig',
             ['bookposts' => $bookPosts, 'pagecount' => $pageCount]);
     }
+
+
 
     public function strangerAction($id = 1) {
 
@@ -74,7 +78,7 @@ class PageController extends Controller
 
     public function searchAction() {
         $form = $this->createFormBuilder(null)
-            ->add("search", TextType::class)
+            ->add('search', TextType::class)
             ->getForm();
 
         return $this->render("BloggerBlogBundle:Page:search.html.twig", [
@@ -83,13 +87,13 @@ class PageController extends Controller
     }
 
     public function handleSearchAction(Request $request) {
-        //var_dump($request->request->get('form')['search']);
+
+        // get repo
         $bookRepo = $this->getDoctrine()->getRepository('BloggerBlogBundle:Book');
 
-
         $string = $request->request->get('form')['search'];
-        //die();
-        $books = $bookRepo->getBooksBySearch($string);
+
+        $books = $bookRepo->getSearchResults($string);
 
         return $this->render("BloggerBlogBundle:Page:result.html.twig", [
             'books' => $books

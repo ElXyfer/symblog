@@ -12,10 +12,13 @@ class BookController extends Controller
 {
     public function viewAction($id)
     {
+        // get doctrine manager
         $entityManager = $this->getDoctrine()->getManager();
 
+        // get book repository
         $bookPost = $entityManager->getRepository('BloggerBlogBundle:Book')->find($id);
 
+        // if theres no post, redirect
         if(empty($bookPost)){
             return $this->redirect($this->generateUrl('index'));
         }
@@ -24,24 +27,26 @@ class BookController extends Controller
 //            return $this->redirect($this->generateUrl('index'));
 //        }
 
+        // go to book view
         return $this->render('BloggerBlogBundle:Book:view.html.twig',
             ['book' => $bookPost]);
 
     }
-    public function FileHelper(Book $bookPost) {
-        // image stuff
 
-        // $file stores the uploaded PDF file
+    // passing book post
+    public function FileHelper(Book $bookPost) {
+
         /**
          * @var UploadedFile $file
          */
 
+        // gets picture using get method
         $file = $bookPost->getPicture();
 
         // Generate a unique name for the file before saving it
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
 
-        // Move the picture to the directory where pictures are stored (config.yml)
+        // Move the picture to the directory where pictures are stored
         $file->move(
             $this->getParameter('picture_directory'), $fileName
         );
@@ -51,8 +56,11 @@ class BookController extends Controller
 
 
     }
+
+    // passing request
     public function createAction(Request $request)
     {
+        //creating a new book
         $bookPost = new Book(null);
 
         $form = $this->createForm(BookType::class, $bookPost,[
@@ -65,6 +73,7 @@ class BookController extends Controller
 
             $entityManager = $this->getDoctrine()->getManager();
 
+            // set submitted by and get logged in user
             $bookPost->setSubmittedBy($this->getUser());
 
             $bookPost->setTimeStamp(new \DateTime());
