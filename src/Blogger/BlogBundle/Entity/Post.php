@@ -20,7 +20,7 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity="Blogger\BlogBundle\Entity\Book", inversedBy="posts")
-     * @ORM\JoinColumn(name="book_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $book;
 
@@ -54,14 +54,33 @@ class Post
 
     private $published;
 
+
     /**
      *
-     * @var float
+     * @var boolean
      *
-     * @ORM\Column(name="rating", type="float")
+     * @ORM\Column(name="likeRating", type="boolean")
      */
 
-    private $rating;
+    private $like;
+
+    /**
+     * @return bool
+     */
+    public function isLike()
+    {
+        return $this->like;
+    }
+
+    /**
+     * @param bool $like
+     *
+     * @return Post
+     */
+    public function setLike($like)
+    {
+        $this->like = $like;
+    }
 
 
     /**
@@ -190,23 +209,6 @@ class Post
     {
         return $this->book;
     }
-
-    /**
-     * @return float
-     */
-    public function getRating(): ?float
-    {
-        return $this->rating;
-    }
-
-    /**
-     * @param float $rating
-     */
-    public function setRating(float $rating)
-    {
-        $this->rating = $rating;
-    }
-
 
 
 

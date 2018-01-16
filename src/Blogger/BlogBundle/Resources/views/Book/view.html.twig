@@ -60,9 +60,15 @@
         {% for post in book.posts %}
 
             <hr>
-            <h4>{{ post.rating }}/5 - {{ post.title }}</h4>
+            <h4>{{ post.title }}</h4>
 
             <p>{{ post.content }}</p>
+
+            {% if post.like %}
+                <p><strong>Thoughts:</strong> Loved it!</p>
+            {% else %}
+                <p><strong>Thoughts:</strong> Hated it!</p>
+            {% endif %}
 
             <p><small>By <a href="{{ path('blogger_stranger', {'id': post.user.id }) }}">{{ post.user }}</a> on {{ post.published|date('H:i d/m/y') }}</small></p>
 
