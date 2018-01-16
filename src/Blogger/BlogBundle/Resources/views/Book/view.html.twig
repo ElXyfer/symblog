@@ -6,18 +6,6 @@
 
     <img src="{{ asset('uploads/pictures/') ~ book.picture }}" height="200">
 
-    {#<h2>{{ book.title }}</h2>#}
-
-    {#<p>Author: {{ book.bookAuthor }}</p>#}
-    {#<p>Publish date: {{ book.yearPublished|date('d/m/y') }}</p>#}
-
-
-    {#<p><small>By {{ book.submittedBy }} </small><a href="{{ path('blogger_book_edit', {'id': book.id}) }}">edit</a></p>#}
-
-    {#<a href="{{ path('blogger_post_create', {'bookId': book.id }) }}">Review this book</a>#}
-
-    {#<hr>#}
-
     <table class="table">
         <thead>
         <tr>
@@ -25,6 +13,10 @@
         </tr>
         </thead>
         <tbody>
+        <tr>
+            <th scope="row">Description:</th>
+            <td>{{ book.description }}</td>
+        </tr>
         <tr>
             <th scope="row">Author:</th>
             <td>{{ book.bookAuthor }}</td>
@@ -34,6 +26,7 @@
             <td>{{ book.yearPublished|date('d/m/y') }}</td>
         </tr>
 
+        <!-- if the poster id is the same as current user hide -->
         {% if book.submittedBy == app.user %}
 
         <tr>
@@ -43,10 +36,6 @@
 
         {% endif %}
 
-        {#<tr>#}
-            {#<th scope="row"><a href="{{ path('blogger_post_create', {'bookId': book.id }) }}">Review this book</a></th>#}
-            {#<td>{{ book.yearPublished|date('d/m/y') }}</td>#}
-        {#</tr>#}
         </tbody>
     </table>
 
@@ -71,8 +60,6 @@
             {% endif %}
 
             <p><small>By <a href="{{ path('blogger_stranger', {'id': post.user.id }) }}">{{ post.user }}</a> on {{ post.published|date('H:i d/m/y') }}</small></p>
-
-
 
         {% endfor %}
     {% endif %}

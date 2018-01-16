@@ -43,6 +43,7 @@ class BookRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function countBooks() {
+
         $queryBuilder = $this->createQueryBuilder('book');
         $queryBuilder->select('COUNT(book)');
         $count = $queryBuilder->getQuery()->getSingleScalarResult();
@@ -50,7 +51,7 @@ class BookRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
-    public function getBooksBySearch($string) {
+    public function getSearchResults($string) {
         $dql = $this->createQueryBuilder('book')
             ->where('book.title LIKE :term')
             ->orWhere('book.bookAuthor LIKE :term')
