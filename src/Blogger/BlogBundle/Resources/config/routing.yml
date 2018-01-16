@@ -86,3 +86,11 @@ admin_user_delete:
     defaults: { _controller: BloggerBlogBundle:Admin:delete }
     requirements:
               id: \d+
+
+book_search:
+  path: /search
+  defaults: { _controller: BloggerBlogBundle:Page:search }
+
+search_handling:
+  path: /search_handling
+  defaults: { _controller: BloggerBlogBundle:Page:handleSearch }

@@ -7,7 +7,7 @@
     {% for post in blogposts %}
         <article>
             <h2><a href="{{ path('blogger_post_view', {id : post.id}) }}">
-                    {{ post.rating }}/5 - {{ post.title | title }}</a></h2>
+                    {{ post.like }} {{ post.title | title }}</a></h2>
 
             <p>{{ post.content | nl2br }}</p>
 

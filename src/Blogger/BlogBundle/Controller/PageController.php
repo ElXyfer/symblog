@@ -4,6 +4,8 @@ namespace Blogger\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 
 class PageController extends Controller
 {
@@ -68,6 +70,30 @@ class PageController extends Controller
 
         return $this->render('BloggerBlogBundle:Page:author.html.twig',
             ['blogposts' => $blogPosts]);
+    }
+
+    public function searchAction() {
+        $form = $this->createFormBuilder(null)
+            ->add("search", TextType::class)
+            ->getForm();
+
+        return $this->render("BloggerBlogBundle:Page:search.html.twig", [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function handleSearchAction(Request $request) {
+        //var_dump($request->request->get('form')['search']);
+        $bookRepo = $this->getDoctrine()->getRepository('BloggerBlogBundle:Book');
+
+
+        $string = $request->request->get('form')['search'];
+        //die();
+        $books = $bookRepo->getBooksBySearch($string);
+
+        return $this->render("BloggerBlogBundle:Page:result.html.twig", [
+            'books' => $books
+        ]);
     }
 
 
