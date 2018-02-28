@@ -94,3 +94,4 @@ book_search:
 search_handling:
   path: /search_handling
   defaults: { _controller: BloggerBlogBundle:Page:handleSearch }
+
