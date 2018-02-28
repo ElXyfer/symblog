@@ -84,3 +84,7 @@ fos_user:
     from_email:
         address: "%mailer_user%"
         sender_name: "%mailer_user%"
+
+fos_rest:
+  routing_loader:
+    default_format: json

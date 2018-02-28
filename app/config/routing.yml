@@ -2,6 +2,11 @@ blogger_blog:
     resource: "@BloggerBlogBundle/Resources/config/routing.yml"
     prefix:   /
 
+blogger_api:
+    type: rest
+    resource: "@BloggerBlogBundle/Resources/config/api_routing.yml"
+    prefix:   /api/v1
+
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
