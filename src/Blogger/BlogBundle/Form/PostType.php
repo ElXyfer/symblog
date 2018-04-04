@@ -29,14 +29,15 @@ class PostType extends AbstractType
                 ])
                 ->add('submit',SubmitType::class);
     }
-    
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Blogger\BlogBundle\Entity\Post'
+            'data_class' => 'Blogger\BlogBundle\Entity\Post',
+            'csrf_protection' => false
         ));
     }
 

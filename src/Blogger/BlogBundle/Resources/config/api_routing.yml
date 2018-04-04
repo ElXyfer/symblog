@@ -1,5 +1,5 @@
 api_blog:
   type: rest
-  resource: Blogger\BlogBundle\Controller\BlogController
-  name_prefix: api_blog_
+  resource: Blogger\BlogBundle\Controller\APiController
+  name_prefix: api_book_
   prefix: /
