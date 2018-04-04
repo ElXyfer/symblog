@@ -62,7 +62,6 @@ class Book
     /**
      * @var string
      * @Assert\NotBlank(message="please enter an image")
-     * @Assert\File(mimeTypes={ "picture" })
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      */
     private $picture;
@@ -85,7 +84,7 @@ class Book
      * Book constructor.
      * @param $posts
      */
-    public function __construct($posts)
+    public function __construct()
     {
         $this->posts = new ArrayCollection();
     }
