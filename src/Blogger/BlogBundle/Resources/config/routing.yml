@@ -95,3 +95,18 @@ search_handling:
   path: /search_handling
   defaults: { _controller: BloggerBlogBundle:Page:handleSearch }
 
+rs_joindin_events_all:
+    path: /events
+    defaults: { _controller: BloggerBlogBundle:Joindin:events }
+
+rs_joindin_event:
+    path: /events/{index}
+    defaults: { _controller: BloggerBlogBundle:Joindin:event }
+    requirements:
+      index: \d+
+
+rs_joindin_event_talks:
+    path: /events/{index}/talks/
+    defaults: { _controller: BloggerBlogBundle:Joindin:talks }
+    requirements:
+      index: \d+
