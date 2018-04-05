@@ -1,0 +1,10 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}BloggerBlogBundle:Joindin:event{% endblock %}
+
+{% block body %}
+    {#<h1>Number: {{ event.index }}</h1>#}
+    <h1>Viewing {{ event.name }}</h1>
+    <p>{{ event.description }}</p>
+    <p>Start date: {{ event.start_date }}</p>
+{% endblock %}
