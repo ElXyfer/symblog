@@ -13,7 +13,7 @@ class JoindinController extends Controller
 
     public function SetUpClient(){
         $client = new Client(["base_uri" => "https://api.joind.in/v2.1/"]);
-        $response = $client->get('events?filter=post');
+        $response = $client->get('events?filter=past');
         $respBody = $response->getBody();
         $results = \GuzzleHttp\json_decode($respBody);
         $this->events = $results->events;
@@ -54,7 +54,7 @@ class JoindinController extends Controller
             $talks = $this->getTalksForEvent($id);
         }
 
-        return $this->render('BloggerBlogBundle:Joindin:talks.html.twig', ["talks" => $this->$talks]);
+        return $this->render('BloggerBlogBundle:Joindin:talks.html.twig', ["talks" => $talks]);
 
     }
 

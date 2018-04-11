@@ -1,11 +1,15 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}BloggerBlogBundle:Joindin:talks{% endblock %}
+{% block title %}Talks{% endblock %}
 
 {% block body %}
+    <h1>Talks</h1>
     {% if talks|length > 0 %}
         {% for talk in talks %}
-            <p>{{ talk.talk_title }}</p>
+            <h1>{{ talk.talk_title }}</h1>
+            <p>{{ talk.talk_description }}</p>
+            <p>{{ talk.start_date }}</p>
+            <hr>
         {% endfor %}
     {% else %}
         <p>This event has no talks</p>
