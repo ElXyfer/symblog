@@ -43,6 +43,7 @@
                         {#<li><a href="#">Contact</a></li>#}
                         {% if not is_granted("ROLE_USER") %}
                             <li><a href="{{ path('book_search') }}">Search for a book</a></li>
+                            <li><a href="{{ path('rs_joindin_events_all') }}">View Events</a></li>
                             <li><a href="{{ path('user_login') }}">Login</a></li>
                         {% else %}
                             <li><a href="{{ path('blogger_author') }}">My posts</a></li>
@@ -51,6 +52,7 @@
                             <li><a href="{{ path('user_logout') }}">Logout</a></li>
                             <li><a href="#">Logged in as {{ app.user.username }}</a></li>
                         {% endif %}
+
 
                     </ul> </div>
             </div>
