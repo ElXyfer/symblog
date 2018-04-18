@@ -88,3 +88,12 @@ fos_user:
 fos_rest:
   routing_loader:
     default_format: json
+
+fos_oauth_server:
+    db_driver: orm       # Drivers available: orm, mongodb, or propel
+    client_class:        Blogger\BlogBundle\Entity\Client
+    access_token_class:  Blogger\BlogBundle\Entity\AccessToken
+    refresh_token_class: Blogger\BlogBundle\Entity\RefreshToken
+    auth_code_class:     Blogger\BlogBundle\Entity\AuthCode
+    service:
+            user_provider: fos_user.user_provider.username
