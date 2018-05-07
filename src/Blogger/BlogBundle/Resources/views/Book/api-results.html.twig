@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1>Here are your search results!</h1>
+    <div class="w3-row-padding w3-center w3-margin-top">
+
+    {% for volume in items %}
+
+        <div class="w3-third" style="margin-bottom: 20px; width: 230px">
+            {#<a style="color: black" href="{{ path('blogger_api_book_result', { index : loop.index }) }}">#}
+                <img src="{{ volume.volumeInfo.imageLinks.smallThumbnail }}" style="">
+                {#<p><a href="{{ path('blogger_api_book_result', { index : loop.index }) }}"></a></p>#}
+                <p>{{ volume.id }}</p>
+            </a>
+        </div>
+        {#<p><{{ volume.volumeInfo.averageRating }}</p>#}
+
+        {#Next page#}
+        {#{% for author in volume.volumeInfo.authors %}#}
+            {#<p>Author({{ loop.index }}): {{ author }}</p>#}
+        {#{% endfor %}#}
+
+        {#{%  if volume.volumeInfo.publisher is not empty %}#}
+            {#<p>Publisher: {{ volume.volumeInfo.publisher }}</p>#}
+        {#{% endif %}#}
+        {#<p>Publish Date: {{ volume.volumeInfo.averageRating }}</p>#}
+        {#{% for category in volume.volumeInfo.categories %}#}
+            {#<p>Category ({{ loop.index }}): {{ category }}</p>#}
+        {#{% endfor %}#}
+
+        {#<p>Synopsis: {{ volume.volumeInfo.description }}</p>#}
+
+
+        {#<h2>Book ID: {{ volume.id }}</h2>#}
+
+    {% endfor %}
+    </div>
+{% endblock %}

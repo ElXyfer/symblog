@@ -4,13 +4,17 @@ namespace Blogger\BlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * Book
  *
  * @ORM\Table(name="books")
  * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Repository\BookRepository")
+ * @ExclusionPolicy("all")
  */
 class Book
 {
@@ -26,6 +30,7 @@ class Book
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     private $id;
 
@@ -42,6 +47,7 @@ class Book
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Expose
      */
     private $title;
 
@@ -49,6 +55,7 @@ class Book
      * @var string
      *
      * @ORM\Column(name="book_author", type="string", length=255)
+     * @Expose
      */
     private $bookAuthor;
 
@@ -56,6 +63,7 @@ class Book
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255)
+     * @Expose
      */
     private $description;
 
@@ -63,6 +71,7 @@ class Book
      * @var string
      * @Assert\NotBlank(message="please enter an image")
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     * @Expose
      */
     private $picture;
 
@@ -70,12 +79,14 @@ class Book
      * @var \DateTime
      *
      * @ORM\Column(name="year_published", type="date", nullable=true)
+     * @Expose
      */
     private $yearPublished;
 
     /**
      *
      * @ORM\Column(name="time_stamp", type="datetime")
+     * @Expose
      */
 
     private $timeStamp;

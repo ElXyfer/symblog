@@ -16,7 +16,7 @@ use Blogger\BlogBundle\Form\PostType;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 
-class APiController extends FOSRestController
+class APiBookController extends FOSRestController
 {
 
     public function getBooksAction(){

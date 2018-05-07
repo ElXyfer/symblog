@@ -2,15 +2,94 @@
 
 namespace Blogger\BlogBundle\Controller;
 
+use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Blogger\BlogBundle\Entity\Book;
 use Blogger\BlogBundle\Form\BookType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
+
 class BookController extends Controller
 {
-    public function viewAction($id)
+
+    private $volumes;
+    private $client;
+
+    private $myResults = array();
+
+    public function SetUpClient() {
+        $this->client = new Client(["base_uri" => "https://www.googleapis.com/books/v1/"]);
+//        $resBody = $response->getBody();
+//        $results = \GuzzleHttp\json_decode($resBody);
+//        $this->volumes = $results->volumes;
+//        $this->client = $client;
+    }
+
+    public function __construct()
+    {
+        $this->SetUpClient();
+    }
+
+    public function apiSearchAction() {
+//        $response = $this->client->get('volumes?q=Harry+Potter');
+//
+//        $resBody = $response->getBody();
+//        $results = \GuzzleHttp\json_decode($resBody);
+//        $this->volumes = $results->items;
+//
+//        return $this->render('BloggerBlogBundle:Book:view.html.twig',
+//            ['volumes' => $this->volumes]);
+        $form = $this->createFormBuilder(null)
+            ->add('search', TextType::class)
+            ->getForm();
+
+        return $this->render("BloggerBlogBundle:Book:api-search.html.twig", [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function handleSearchAction(Request $request) {
+        $searchString = $request->request->get('form')['search'];
+
+        $parsedString = str_replace("%20" || " ", "+", $searchString);
+
+        $response = $this->client->get('volumes?q='.$parsedString);
+
+        $resBody = $response->getBody();
+        $results = \GuzzleHttp\json_decode($resBody);
+        $this->volumes = $results->items;
+
+
+//        $this->myResults = $this->volumes;
+//
+//        $apiBook = $this->myResults[1];
+
+
+
+//    return $this->render(var_dump($apiBook));
+
+
+        return $this->render("BloggerBlogBundle:Book:api-results.html.twig", [
+            'items' => $this->volumes
+        ]);
+    }
+
+    public function apiBookAction($id){
+
+//        $apiBook = $this->myResults[$index - 1];
+
+       return $this->render(var_dump($this->volumes->item));
+
+        return $this->render('BloggerBlogBundle:Book:api-result.html.twig', ["item" => $apiBook]);
+
+
+
+    }
+
+
+    public function viewAction($id) // $id
     {
         // get doctrine manager
         $entityManager = $this->getDoctrine()->getManager();

@@ -3,12 +3,16 @@
 namespace Blogger\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * Post
  *
  * @ORM\Table(name="posts")
  * @ORM\Entity(repositoryClass="Blogger\BlogBundle\Repository\PostRepository")
+ * @ExclusionPolicy("all")
  */
 class Post
 {
@@ -37,6 +41,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Expose
      */
     private $title;
 
@@ -44,12 +49,14 @@ class Post
      * @var string
      *
      * @ORM\Column(name="content", type="string", length=255)
+     * @Expose
      */
     private $content;
 
     /**
      *
      * @ORM\Column(name="published", type="datetime")
+     * @Expose
      */
 
     private $published;
@@ -60,6 +67,7 @@ class Post
      * @var boolean
      *
      * @ORM\Column(name="likeRating", type="boolean")
+     * @Expose
      */
 
     private $like;

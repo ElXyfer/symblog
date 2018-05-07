@@ -1,5 +1,12 @@
-api_blog:
+api_blog_book:
   type: rest
-  resource: Blogger\BlogBundle\Controller\APiController
+  resource: Blogger\BlogBundle\Controller\APiBookController
   name_prefix: api_book_
+  prefix: /
+
+api_blog_post:
+  type: rest
+  parent: api_blog_book
+  resource: Blogger\BlogBundle\Controller\APiPostController
+  name_prefix: api_post_
   prefix: /

@@ -96,4 +96,11 @@ fos_oauth_server:
     refresh_token_class: Blogger\BlogBundle\Entity\RefreshToken
     auth_code_class:     Blogger\BlogBundle\Entity\AuthCode
     service:
-            user_provider: fos_user.user_provider.username
+        user_provider: fos_user.user_provider.username
+
+jms_serializer:
+    metadata:
+        directories:
+          FOSUB:
+            namespace_prefix: "FOS\\UserBundle"
+            path: "%kernel.root_dir%/serializer/FOSUserBundle"
