@@ -1,0 +1,33 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+    <h1>{{ item.volumeInfo.title }}</h1>
+
+        <div class="book-cover" style="float: left; width: 30%; padding-right: 15px">
+            <img src="{{ item.volumeInfo.imageLinks.smallThumbnail }}" style="width: 100%">
+        </div>
+
+        <div class="book-info">
+
+            {% for author in item.volumeInfo.authors %}
+                <p>By ({{ loop.index }}): {{ author }}</p>
+            {% endfor %}
+
+            <p>Average rating: {{ item.volumeInfo.averageRating }}</p>
+
+            <p>Publisher: {{ item.volumeInfo.publisher }}</p>
+
+            <p>Publish Date: {{ item.volumeInfo.publishedDate }}</p>
+
+            {% for category in item.volumeInfo.categories %}
+                <p>Category ({{ loop.index }}): {{ category }}</p>
+            {% endfor %}
+
+            <p>Synopsis: {{ item.volumeInfo.description }}</p>
+        </div>
+
+    </div>
+
+
+{% endblock %}

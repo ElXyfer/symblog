@@ -4,6 +4,7 @@
 
 {% block body %}
 
+    <div class="container">
     <img src="{{ asset('uploads/pictures/') ~ book.picture }}" height="200">
 
     <table class="table">
@@ -17,21 +18,49 @@
             <th scope="row">Description:</th>
             <td>{{ book.description }}</td>
         </tr>
+
+
         <tr>
             <th scope="row">Author:</th>
-            <td>{{ book.bookAuthor }}</td>
+            {% for author in item.volumeInfo.authors %}
+                <td>({{ loop.index }}): {{ author }}</td>
+            {% endfor %}
         </tr>
         <tr>
             <th scope="row">Publish date:</th>
             <td>{{ book.yearPublished|date('d/m/y') }}</td>
         </tr>
 
+        {% if item.volumeInfo.categories is defined %}
+            {% for category in item.volumeInfo.categories %}
+                <tr>
+                    <th scope="row">Category: </th>
+                    <td>({{ loop.index }}): {{ category }}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+
+        {% if item.volumeInfo.averageRating is defined %}
+            <tr>
+                <th scope="row">Average ratings:</th>
+                    <td>{{ item.volumeInfo.averageRating }}</td>
+            </tr>
+        {% endif %}
+
+        {% if item.saleInfo.buyLink is defined %}
+        <tr>
+            <th scope="row">Buy this book:</th>
+            <td><a href="{{ item.saleInfo.buyLink }}">Here</a></td>
+        </tr>
+        {% endif %}
+
+
+
         <!-- if the poster id is the same as current user hide -->
         {% if book.submittedBy == app.user %}
 
         <tr>
-            <th scope="row">Edit post:</th>
-            <td><a href="{{ path('blogger_book_edit', {'id': book.id}) }}">{{ book.submittedBy }}</a></td>
+            <th scope="row"><a href="{{ path('blogger_book_edit', {'id': book.id}) }}">Edit this post</a></th>
         </tr>
 
         {% endif %}
@@ -63,6 +92,7 @@
 
         {% endfor %}
     {% endif %}
+    </div>
 
 {% endblock %}
 

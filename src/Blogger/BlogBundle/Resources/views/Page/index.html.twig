@@ -73,6 +73,7 @@
         <p>Author: {{ book.bookAuthor }}</p>
         <p>Published: {{ book.yearPublished | date('d/m/y') }}</p>
             <small>Posted by {{ book.submittedBy }} at {{ book.timeStamp|date('H:i d/m/y') }}</small>
+
     </article>
 
 {% endfor %}
