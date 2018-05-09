@@ -50,7 +50,7 @@ user_logout:
     defaults: { _controller: FOSUserBundle:Security:logout }
 
 blogger_book_view:
-    path:     /book_view/
+    path:     /book_view/{id}
     defaults: { _controller: BloggerBlogBundle:Book:view }
     requirements:
           id: \d+
@@ -119,8 +119,12 @@ blogger_api_searchHandle:
     path: /searchHandleApi
     defaults: { _controller: BloggerBlogBundle:Book:handleSearch }
 
-#blogger_api_book_result:
-#    path: /singleBook/{id}
-#    defaults: { _controller: BloggerBlogBundle:Book:apiBook }
-#    requirements:
-#      id: \d+
+blogger_api_book_result:
+    path: /singleBook/{id}
+    defaults: { _controller: BloggerBlogBundle:Book:apiBook }
+    requirements:
+
+blogger_api_NYT_book_list:
+    path: /best-sellers
+    defaults: { _controller: BloggerBlogBundle:Book:bestSeller }
+    requirements:

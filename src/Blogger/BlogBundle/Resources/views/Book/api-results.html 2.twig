@@ -1,19 +1,17 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <h1>Here are your search results!</h1>
-    <div class="w3-row-padding w3-center w3-margin-top">
+    <div class="container w3-row-padding w3-center w3-margin-top">
 
-    {% for volume in items %}
+        <h1>Here are your search results!</h1>
+
+        {% for volume in items %}
 
         <div class="w3-third" style="margin-bottom: 20px; width: 230px">
-            {#<a style="color: black" href="{{ path('blogger_api_book_result', { index : loop.index }) }}">#}
                 <img src="{{ volume.volumeInfo.imageLinks.smallThumbnail }}" style="">
-                {#<p><a href="{{ path('blogger_api_book_result', { index : loop.index }) }}"></a></p>#}
-                <p>{{ volume.id }}</p>
-            </a>
+            <p><a href="{{ path('blogger_api_book_result', { id : volume.id}) }}">{{ volume.volumeInfo.title }}</a></p>
+            <p>{{ volume.saleInfo.buyLink }}</p>
         </div>
-        {#<p><{{ volume.volumeInfo.averageRating }}</p>#}
 
         {#Next page#}
         {#{% for author in volume.volumeInfo.authors %}#}
