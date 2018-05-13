@@ -15,23 +15,57 @@ class BookController extends Controller
 {
 
     private $volumes;
-    private $client;
+    private $GBclient;
     private $NYTClient;
 
-    private $myResults = array();
 
     public function SetUpClient() {
-        $this->client = new Client(["base_uri" => "https://www.googleapis.com/books/v1/"]);
+        $this->GBclient = new Client(["base_uri" => "https://www.googleapis.com/books/v1/"]);
         $this->NYTClient = new Client(["base_uri" => "https://api.nytimes.com/svc/books/v3/"]);
-//        $resBody = $response->getBody();
-//        $results = \GuzzleHttp\json_decode($resBody);
-//        $this->volumes = $results->volumes;
-//        $this->client = $client;
     }
 
     public function __construct()
     {
         $this->SetUpClient();
+    }
+
+    // API Actions
+    public function apiSearchAction() {
+
+        $form = $this->createFormBuilder(null)
+            ->add('search', TextType::class)
+            ->getForm();
+
+        return $this->render("BloggerBlogBundle:Book:api-search.html.twig", [
+            'form' => $form->createView()
+        ]);
+    }
+
+    public function handleSearchAction(Request $request) {
+        $searchString = $request->request->get('form')['search'];
+
+        $response = $this->GBclient->get('volumes?q='.$searchString);
+
+        $resBody = $response->getBody();
+        $results = \GuzzleHttp\json_decode($resBody);
+        $this->volumes = $results->items;
+
+        return $this->render("BloggerBlogBundle:Book:api-results.html.twig", [
+            'items' => $this->volumes
+        ]);
+    }
+
+    public function apiBookAction($id){
+
+        $response = $this->GBclient->get('volumes?q=id='.$id);
+
+        $resBody = $response->getBody();
+        $results = \GuzzleHttp\json_decode($resBody);
+        $item = $results->items[0];
+
+        return $this->render('BloggerBlogBundle:Book:api-result.html.twig',
+            ["item" => $item]);
+
     }
 
     public function bestSellerAction() {
@@ -50,73 +84,9 @@ class BookController extends Controller
 
     }
 
-    public function apiSearchAction() {
-//        $response = $this->client->get('volumes?q=Harry+Potter');
-//
-//        $resBody = $response->getBody();
-//        $results = \GuzzleHttp\json_decode($resBody);
-//        $this->volumes = $results->items;
-//
-//        return $this->render('BloggerBlogBundle:Book:view.html.twig',
-//            ['volumes' => $this->volumes]);
-        $form = $this->createFormBuilder(null)
-            ->add('search', TextType::class)
-            ->getForm();
 
-        return $this->render("BloggerBlogBundle:Book:api-search.html.twig", [
-            'form' => $form->createView()
-        ]);
-    }
-
-    public function handleSearchAction(Request $request) {
-        $searchString = $request->request->get('form')['search'];
-
-        $parsedString = str_replace("%20" || " ", "+", $searchString);
-
-        $response = $this->client->get('volumes?q='.$parsedString);
-
-        $resBody = $response->getBody();
-        $results = \GuzzleHttp\json_decode($resBody);
-        $this->volumes = $results->items;
-
-
-        $this->myResults = $this->volumes;
-//
-       $apiBook = $this->myResults;
-
-
-
-//    return $this->render(var_dump($apiBook[0]->id));
-
-
-        return $this->render("BloggerBlogBundle:Book:api-results.html.twig", [
-            'items' => $this->volumes
-        ]);
-    }
-
-    public function apiBookAction($id){
-
-        $response = $this->client->get('volumes?q=id='.$id);
-
-        $resBody = $response->getBody();
-        $results = \GuzzleHttp\json_decode($resBody);
-        $item = $results->items[0];
-
-        return $this->render('BloggerBlogBundle:Book:api-result.html.twig',
-            ["item" => $item]);
-
-    }
-
-
-
-
-
-    public function viewAction($id) // $id
+    public function viewAction($id)
     {
-
-
-
-
 
         // get doctrine manager
         $entityManager = $this->getDoctrine()->getManager();
@@ -124,22 +94,12 @@ class BookController extends Controller
         // get book repository
         $bookPost = $entityManager->getRepository('BloggerBlogBundle:Book')->find($id);
 
-//        $bookPostTitle = $bookPost->getTitle();
-//
-//        $response = $this->client->get('volumes?q=title='.$bookPostTitle);
-//
-//        $resBody = $response->getBody();
-//        $results = \GuzzleHttp\json_decode($resBody);
-//        $item = $results->items[0];
-
-//        return $this->render(var_dump($item));
-
         // if theres no post, redirect
         if(empty($bookPost)){
             return $this->redirect($this->generateUrl('index'));
         }
 
-        $response = $this->client->get('volumes?q='.$bookPost->getTitle());
+        $response = $this->GBclient->get('volumes?q='.$bookPost->getTitle());
         $resBody = $response->getBody();
         $results = \GuzzleHttp\json_decode($resBody);
         $item = $results->items[0];
@@ -209,7 +169,7 @@ class BookController extends Controller
             ['form' => $form->createView()]);
     }
 
-    public function editAction($id, Request $request)
+    public function editAction(Request $request, $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
 

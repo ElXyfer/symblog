@@ -25,13 +25,16 @@ class APiBookController extends FOSRestController
         $books = $em->getRepository('BloggerBlogBundle:Book')->findAll();
 
         if(empty($books)) {
-            $view = $this->view(null, 404);
+            $view = $this->view("No books found.", 404);
         } else {
             $view = $this->view($books);
         }
 
         return $this->handleView($view);
     }
+
+
+
 
     public function getBookAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -45,6 +48,8 @@ class APiBookController extends FOSRestController
         $view = $this->view(null, 404);
         return $this->handleView($view);
     }
+
+
 
     public function postBookAction(Request $request) {
         $book = new Book();
@@ -63,7 +68,7 @@ class APiBookController extends FOSRestController
             $EntityManager->persist($book);
             $EntityManager->flush();
 
-            return $this->handleView($this->view(null, 201)
+            return $this->handleView($this->view("The book has been created.", 201)
                 ->setLocation(
                     $this->generateUrl('api_book_get_book', ['id' => $book->getId()]
                     )
@@ -74,6 +79,8 @@ class APiBookController extends FOSRestController
             return $this->handleView($this->view($form, 400));
         }
     }
+
+
 
     public function putBookAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
@@ -95,7 +102,7 @@ class APiBookController extends FOSRestController
             $em->persist($book);
             $em->flush();
 
-            return $this->handleView($this->view(null, 201)
+            return $this->handleView($this->view("Book updated successfully.", 202)
                 ->setLocation(
                     $this->generateUrl('api_book_get_book', ['id' => $book->getId()]
                     )
@@ -107,6 +114,7 @@ class APiBookController extends FOSRestController
         }
 
     }
+
 
     public function deleteBookAction($id) {
         $em = $this->getDoctrine()->getManager();
