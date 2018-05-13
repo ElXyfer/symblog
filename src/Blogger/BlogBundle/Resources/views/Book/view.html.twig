@@ -5,7 +5,11 @@
 {% block body %}
 
     <div class="container">
-    <img src="{{ asset('uploads/pictures/') ~ book.picture }}" height="200">
+        {% if item.volumeInfo.imageLinks is defined %}
+            <img src="{{ item.volumeInfo.imageLinks.smallThumbnail }}" style="width: 25%">
+        {% else %}
+         <img src="{{ asset('uploads/pictures/') ~ book.picture }}" height="200">
+        {% endif %}
 
     <table class="table">
         <thead>
@@ -19,22 +23,30 @@
             <td>{{ book.description }}</td>
         </tr>
 
-
         <tr>
-            <th scope="row">Author:</th>
+            <th scope="row">Author(s):</th>
             {% for author in item.volumeInfo.authors %}
                 <td>({{ loop.index }}): {{ author }}</td>
             {% endfor %}
         </tr>
-        <tr>
-            <th scope="row">Publish date:</th>
-            <td>{{ book.yearPublished|date('d/m/y') }}</td>
-        </tr>
+
+        {% if item.volumeInfo.publishedDate is not defined %}
+            <tr>
+                <th scope="row">Publish date:</th>
+                <td>{{ item.volumeInfo.publishedDate }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <th scope="row">Publish date:</th>
+                {#<td>{{ book.publishedear }}</td>#}
+            </tr>
+        {% endif %}
+
 
         {% if item.volumeInfo.categories is defined %}
             {% for category in item.volumeInfo.categories %}
                 <tr>
-                    <th scope="row">Category: </th>
+                    <th scope="row">Category(s): </th>
                     <td>({{ loop.index }}): {{ category }}</td>
                 </tr>
             {% endfor %}
@@ -42,7 +54,7 @@
 
         {% if item.volumeInfo.averageRating is defined %}
             <tr>
-                <th scope="row">Average ratings:</th>
+                <th scope="row">Average rating on google books:</th>
                     <td>{{ item.volumeInfo.averageRating }}</td>
             </tr>
         {% endif %}
@@ -72,7 +84,11 @@
 
     <hr>
 
-    <h3>Reviews</h3>
+        {% if book.posts|length < 1 %}
+            <h3>No Reviews yet</h3>
+        {% else %}
+            <h3>Reviews</h3>
+        {% endif %}
 
     {% if book.posts %}
         {% for post in book.posts %}

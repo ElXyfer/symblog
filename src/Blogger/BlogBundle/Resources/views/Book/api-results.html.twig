@@ -7,10 +7,16 @@
 
         {% for volume in items %}
 
-        <div class="w3-third" style="margin-bottom: 20px; width: 230px">
+        <div class="w3-third">
+            <a href="{{ path('blogger_api_book_result', { id : volume.id}) }}">
+            {%  if volume.volumeInfo.imageLinks is defined %}
                 <img src="{{ volume.volumeInfo.imageLinks.smallThumbnail }}" style="">
-            <p><a href="{{ path('blogger_api_book_result', { id : volume.id}) }}">{{ volume.volumeInfo.title }}</a></p>
-            <p>{{ volume.saleInfo.buyLink }}</p>
+            {% else %}
+                <img src="{{ asset('uploads/pictures/NoImage.jpg') }}" style="">
+
+            {% endif %}
+            <p>{{ volume.volumeInfo.title }}</p></a>
+            {#<p>{{ volume.saleInfo.buyLink }}</p>#}
         </div>
 
         {#Next page#}

@@ -69,7 +69,6 @@ class Book
 
     /**
      * @var string
-     * @Assert\NotBlank(message="please enter an image")
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      * @Expose
      */
@@ -78,7 +77,7 @@ class Book
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="year_published", type="date", nullable=true)
+     * @ORM\Column(name="year_published", type="string", nullable=true)
      * @Expose
      */
     private $yearPublished;

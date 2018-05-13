@@ -5,26 +5,38 @@
     <h1>{{ item.volumeInfo.title }}</h1>
 
         <div class="book-cover" style="float: left; width: 30%; padding-right: 15px">
+         {%  if item.volumeInfo.imageLinks is defined %}
             <img src="{{ item.volumeInfo.imageLinks.smallThumbnail }}" style="width: 100%">
+        {% endif %}
         </div>
 
         <div class="book-info">
 
+         {%  if item.volumeInfo.authors is defined %}
             {% for author in item.volumeInfo.authors %}
                 <p>By ({{ loop.index }}): {{ author }}</p>
             {% endfor %}
+        {% endif %}
 
             <p>Average rating: {{ item.volumeInfo.averageRating }}</p>
 
+    {%  if item.volumeInfo.publisher is defined %}
             <p>Publisher: {{ item.volumeInfo.publisher }}</p>
+        {% endif %}
 
             <p>Publish Date: {{ item.volumeInfo.publishedDate }}</p>
 
+    {%  if item.volumeInfo.categories is defined %}
             {% for category in item.volumeInfo.categories %}
                 <p>Category ({{ loop.index }}): {{ category }}</p>
             {% endfor %}
+        {% endif %}
+
+    {%  if item.volumeInfo.description is defined %}
 
             <p>Synopsis: {{ item.volumeInfo.description }}</p>
+        {% endif %}
+
         </div>
 
     </div>
